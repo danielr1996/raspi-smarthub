@@ -1,0 +1,11 @@
+---
+- hosts: all
+  roles:
+    - role: prometheus
+      tags: [prometheus]
+    - role: grafana
+      tags: [grafana]
+    - role: smartmeter
+      tags: [smartmeter]
+    - role: speedtest
+      tags: [speedtest]

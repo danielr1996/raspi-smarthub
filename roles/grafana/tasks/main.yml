@@ -1,0 +1,30 @@
+- name: Ensure grafana apt key exists
+  become: yes
+  apt_key:
+    url: https://packages.grafana.com/gpg.key
+    id: 4E40DDF6D76E284A4A6780E48C8C34C524098CB6
+    state: present
+- name: Ensure grafana repository exists
+  become: yes
+  apt_repository:
+    repo: deb https://packages.grafana.com/oss/deb stable main
+    filename: grafana
+    update_cache: yes
+    state: present
+- name: Ensure grafana is installed
+  become: yes
+  apt:
+    name: grafana
+    state: present
+- name: Ensure grafana dashboard provisioning is setup
+  become: yes
+  template:
+    src: templates/dashboards.yml
+    dest: /etc/grafana/provisioning/dashboards/dashboards.yml
+  register: smartmeterGrafanaDashboardConfig
+- name: Ensure grafana is restarted when config has changed
+  become: yes
+  systemd:
+    state: restarted
+    name: grafana-server
+  when: smartmeterGrafanaDashboardConfig.changed

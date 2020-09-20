@@ -1,0 +1,33 @@
+- name: Ensure prometheus targets directory exists
+  become: yes
+  file:
+    path: /etc/prometheus/targets
+    state: directory
+- name: Ensure smartmeter-target.json exists
+  become: yes
+  template:
+    src: templates/smartmeter-target.json
+    dest: /etc/prometheus/targets/smartmeter-target.json
+  register: config
+- name: Ensure prometheus datasource exists
+  become: yes
+  template:
+    src: templates/prometheus-datasource.yml
+    dest: /etc/grafana/provisioning/datasources/prometheus-datasource.yml
+  register: smartmeterGrafanaDatasourceConfig
+- name: Ensure grafana is restarted when config has changed
+  become: yes
+  systemd:
+    state: restarted
+    name: grafana-server
+  when: smartmeterGrafanaDatasourceConfig.changed
+- name: Ensure grafana dashboard directory exists
+  become: yes
+  file:
+    path: /var/lib/grafana/dashboards
+    state: directory
+- name: Ensure smartmeter dashboard exists
+  become: yes
+  copy:
+    src: templates/smartmeter-dashboard.json
+    dest: /var/lib/grafana/dashboards/smartmeter-dashboard.json

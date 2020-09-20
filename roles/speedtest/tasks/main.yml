@@ -1,0 +1,27 @@
+- name: Ensure speedtest apt key exists
+  become: yes
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 379CE192D401AB61
+    state: present
+- name: Ensure speedtest repository exists
+  become: yes
+  apt_repository:
+    repo: deb https://ookla.bintray.com/debian bionic main
+    filename: speedtest
+    update_cache: yes
+    state: present
+- name: Ensure speedtest is installed
+  become: yes
+  apt:
+    name: speedtest
+    state: present
+- name: Ensure speedtest crontab exists
+  cron:
+    name: "speedtest"
+    job: speedtest --format=csv | awk -F "\"*,\"*" '{print "speedtest_ping "$3"\nspeedtest_upload "$6*8"\nspeedtest_download "$7*8}' | curl --data-binary @- http://localhost:9091/metrics/job/speedtest/instance/smartpi
+- name: Ensure speedtest dashboard exists
+  become: yes
+  copy:
+    src: templates/speedtest-dashboard.json
+    dest: /var/lib/grafana/dashboards/speedtest-dashboard.json
