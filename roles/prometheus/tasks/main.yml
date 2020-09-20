@@ -1,0 +1,23 @@
+- name: Ensure prometheus pushgateway is installed
+  become: yes
+  apt:
+    name: prometheus-pushgateway
+    state: present
+
+- name: Ensure prometheus is installed
+  become: yes
+  apt:
+    name: prometheus
+    state: present
+- name: Ensure prometheus config exists
+  become: yes
+  template:
+    src: templates/prometheus.yml
+    dest: /etc/prometheus/prometheus.yml
+  register: prometheusConfig
+- name: Ensure prometheus is restarted when config has changed
+  become: yes
+  systemd:
+    state: restarted
+    name: prometheus
+  when: prometheusConfig.changed

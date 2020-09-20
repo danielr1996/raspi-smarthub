@@ -1,59 +1,34 @@
 # raspi-smarthub
-Raspberry Pi monitoring stack with influxdb and grafana.
+Raspberry Pi monitoring stack with prometheus and grafana using ansible.
 
-> This is mainly a documentation for me on what to install but it might be useful for someone else too. Eventually this will be converted to an ansible playbook but for now it's just text instructions.
+> This is mainly a documentation for me on what to install but it might be useful for someone else too. 
 
 ## What you'll get
-This installs the TIG stack (Telegraf, InfluxDB, Grafana) on a Raspberry PI 1 B+ (armv6hf) with some dashboards (displaying smart plug measures, displaying speedtest results).
+This installs prometheus and grafana on a Raspberry PI 4 (arm64) with some dashboards (displaying smart plug measures, displaying speedtest results).
 
-## Basic Assumptions
-Throught this guide I will make some basic assumptions that are applicable for all components, therefore I will explain them once here. Besides from that components can be installed separately and don't depend on each other.
+To see documentation for each role see `role/<rolename>/README.md`. 
 
-### Operating system
-I installed RaspiOS Buster on my Raspberry Pi
+### Prometheus + Pushgateway
+Sets up prometheus and pushgateway to scrape metrics and push metrics from bash jobs
 
-### Git
-Install git with `sudo apt -y install git` if you don't have already.
+### Grafana
+Sets up grafana to view the metrics stored in prometheus.
 
-### Software installation
-I prefer to use the vendor distribution instead of the software that comes packaged with the operating system because they often are a few releases behind. If available I prefer vendor apt repositories because they combine the benefit of easy installation with `apt -y install <package-name>` but are the most recent version. If these packages are not available from the vendor see the next section.
+### smartmeter
+Sets up a the targets to monitor smart plugs with the tasmota firmware (e.g. sonoff basic)
 
-### Directory structure for software not included in the repositories
-If a software is not available through official sources I use the following convention:
+### speedtest
+Sets up speedtest-cli for measuring dsl speed
 
-For a package named `<package-name>` create a user and group `<package-name`. That user will own all files and processes belonging to that package.
+### node-exporter
+Sets up node-exporter to monitor the raspberry pi itself (Currently not yet included in ansible, see `docs/node-exporter/node-exporter.md`)
+
+## Running ansible
 ```
-sudo groupadd <package-name>
-sudo useradd <package-name> -g <package-name> -s /usr/sbin/nologin
+vagrant up
+vagrant ssh
 ```
-
-The directory structure looks alot like the usual filesystem, but it's scoped to `<package-name>` so everything belonging to a package is in the same directory.
-Additional I like all binaries to `/opt/bin/<binary-name>` so I only need to add `/opt/bin` to path instead of each individual binary.
 
 ```shell script
-
+ansible-playbook -i /vagrant/hosts.yml /vagrant/playbook.yml
 ```
-
-```
-/
-|--opt
-    |--<package-name>
-        |--bin
-            |-- <package-bin> # One or more binaries for that package
-        |--var # data for that package like database, etc.
-        |--etc # configuration for the package
-    |--bin
-      |<package-bin> #linked binaries from /opt/<package-name> so you only need to export this dir in $PATH
-```
-Add the following to your ~/.profile to include /opt/bin in your $PATH
-```
-# set PATH so includes /opt/bin if it exists
-if [ -d "/opt/bin" ] ; then
-    PATH=$PATH:/opt/bin
-fi
-```
-and run `source .profile` to activate the changes
-
-It has the following benefits:
-* simple uninstallation, just remove /opt/package-name and sym links
-* easy control of right, if another user needs access to that package just add him to group.
