@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
   "links": [],
   "panels": [
     {
@@ -51,7 +50,7 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 12,
-        "w": 24,
+        "w": 19,
         "x": 0,
         "y": 0
       },
@@ -133,6 +132,63 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "yellow",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 5,
+        "x": 19,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "7.1.5",
+      "targets": [
+        {
+          "expr": "speedtest_upload",
+          "interval": "",
+          "legendFormat": "Upload",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Up/Download Geschwindigkeit",
+      "type": "gauge"
     },
     {
       "aliasColors": {},
@@ -272,5 +328,5 @@
   "timezone": "",
   "title": "Speedtest",
   "uid": "10-O-wmRz",
-  "version": 1
+  "version": 2
 }
