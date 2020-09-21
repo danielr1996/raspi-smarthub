@@ -1,0 +1,9 @@
+[Unit]
+Description=fritzbox exporter for prometheus
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/fritzbox_exporter
+
+[Install]
+WantedBy=multi-user.target

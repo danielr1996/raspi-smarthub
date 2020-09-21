@@ -1,0 +1,10 @@
+[
+  {
+    "labels":{
+      "job":"fritzbox_exporter"
+    },
+    "targets":[
+      "localhost:9133"
+    ]
+  }
+]

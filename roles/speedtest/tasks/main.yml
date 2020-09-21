@@ -19,9 +19,31 @@
 - name: Ensure speedtest crontab exists
   cron:
     name: "speedtest"
-    job: speedtest --format=csv | awk -F "\"*,\"*" '{print "speedtest_ping "$3"\nspeedtest_upload "$6*8"\nspeedtest_download "$7*8}' | curl --data-binary @- http://localhost:9091/metrics/job/speedtest/instance/smartpi
+    job: speedtest --format=csv | awk -F "\"*,\"*" '{print "speedtest_ping "$3"\nspeedtest_downstream "$6*8"\nspeedtest_upstream "$7*8}' | curl --data-binary @- http://localhost:9091/metrics/job/speedtest/instance/smartpi
 - name: Ensure speedtest dashboard exists
   become: yes
   copy:
     src: templates/speedtest-dashboard.json
     dest: /var/lib/grafana/dashboards/speedtest-dashboard.json
+- name: Ensure fritzbox-target.json exists
+  become: yes
+  template:
+    src: templates/fritzbox-target.json
+    dest: /etc/prometheus/targets/fritzbox-target.json
+- name: Ensure fritzbox_exporter binary is present
+  become: yes
+  get_url:
+    url: https://github.com/danielr1996/fritzbox_exporter/releases/download/v2.0/fritzbox_exporter-linux-armv6l
+    dest: /usr/local/bin/fritzbox_exporter
+    mode: '0777'
+- name: Ensure fritzbox exporter systemd service exists
+  become: yes
+  template:
+    src: templates/fritzbox_exporter.service
+    dest: /etc/systemd/system/fritzbox_exporter.service
+- name: Ensure fritzbox_exporter service is started
+  become: yes
+  systemd:
+    state: started
+    name: fritzbox_exporter
+    daemon_reload: yes

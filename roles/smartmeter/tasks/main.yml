@@ -8,7 +8,6 @@
   template:
     src: templates/smartmeter-target.json
     dest: /etc/prometheus/targets/smartmeter-target.json
-  register: config
 - name: Ensure prometheus datasource exists
   become: yes
   template:
