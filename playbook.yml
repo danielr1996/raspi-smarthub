@@ -9,3 +9,5 @@
       tags: [smartmeter]
     - role: speedtest
       tags: [speedtest]
+    - role: node-exporter
+      tags: [node-exporter]

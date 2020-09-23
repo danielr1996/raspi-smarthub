@@ -21,7 +21,7 @@ Sets up a the targets to monitor smart plugs with the tasmota firmware (e.g. son
 Sets up speedtest-cli for measuring dsl speed
 
 ### node-exporter
-Sets up node-exporter to monitor the raspberry pi itself (Currently not yet included in ansible, see `docs/node-exporter/node-exporter.md`)
+Sets up node-exporter to monitor the raspberry pi itself
 
 ## Running ansible
 ```

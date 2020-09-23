@@ -1,0 +1,20 @@
+- name: Ensure node-exporter is installed
+  become: yes
+  apt:
+    name: prometheus-node-exporter
+    state: present
+- name: Ensure node-exporter is started
+  become: yes
+  systemd:
+    state: started
+    name: prometheus-node-exporter
+- name: Ensure node-exporter-target.json exists
+  become: yes
+  template:
+    src: templates/node-exporter-target.json
+    dest: /etc/prometheus/targets/node-exporter-target.json
+- name: Ensure node-exporter dashboard exists
+  become: yes
+  copy:
+    src: templates/node-exporter-dashboard.json
+    dest: /var/lib/grafana/dashboards/node-exporter-dashboard.json
