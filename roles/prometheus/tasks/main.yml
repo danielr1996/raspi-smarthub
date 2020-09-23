@@ -3,7 +3,11 @@
   apt:
     name: prometheus-pushgateway
     state: present
-
+- name: Ensure prometheus pushgateway is started
+  become: yes
+  systemd:
+    state: started
+    name: prometheus-pushgateway
 - name: Ensure prometheus is installed
   become: yes
   apt:
