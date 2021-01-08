@@ -1,10 +1,18 @@
 [
   {
-    "labels":{
-      "job":"node"
+    "labels": {
+      "job": "node"
     },
-    "targets":[
+    "targets": [
       "localhost:9100"
+    ]
+  },
+  {
+    "labels": {
+      "job": "windows"
+    },
+    "targets": [
+      "zeus:9182"
     ]
   }
 ]

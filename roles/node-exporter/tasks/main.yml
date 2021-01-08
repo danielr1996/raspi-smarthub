@@ -18,3 +18,9 @@
   copy:
     src: templates/node-exporter-dashboard.json
     dest: /var/lib/grafana/dashboards/node-exporter-dashboard.json
+
+- name: Ensure ohm dashboard exists
+  become: yes
+  copy:
+    src: templates/ohm-dashboard.json
+    dest: /var/lib/grafana/dashboards/ohm-dashboard.json
