@@ -30,3 +30,8 @@
   copy:
     src: templates/smartmeter-dashboard.json
     dest: /var/lib/grafana/dashboards/smartmeter-dashboard.json
+- name: Ensure smartmeter ferraris dashboard exists
+  become: yes
+  copy:
+    src: templates/smartmeter-ferraris-dashboard.json
+    dest: /var/lib/grafana/dashboards/smartmeter-ferraris-dashboard.json
