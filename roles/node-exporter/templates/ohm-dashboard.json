@@ -16,8 +16,7 @@
   "editable": true,
   "gnetId": 11587,
   "graphTooltip": 1,
-  "id": 6,
-  "iteration": 1610088368983,
+  "iteration": 1610094924385,
   "links": [],
   "panels": [
     {
@@ -896,7 +895,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1610088368983,
+      "repeatIteration": 1610094924385,
       "repeatPanelId": 36,
       "scopedVars": {
         "power": {
@@ -989,7 +988,7 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 8,
         "x": 0,
         "y": 25
@@ -1034,12 +1033,19 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "ohm_${hardtemp}_celsius{instance=\"$instance\"}",
+          "expr": "avg_over_time(ohm_${hardtemp}_celsius{instance=\"$instance\"}[3m])",
           "format": "time_series",
           "instant": false,
+          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{sensor}}",
+          "legendFormat": "AVG {{sensor}}",
           "refId": "A"
+        },
+        {
+          "expr": "ohm_${hardtemp}_celsius{instance=\"$instance\"}",
+          "interval": "",
+          "legendFormat": "RAW {{sensor}}",
+          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -1099,7 +1105,7 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 8,
         "x": 8,
         "y": 25
@@ -1131,7 +1137,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1610088368983,
+      "repeatIteration": 1610094924385,
       "repeatPanelId": 4,
       "scopedVars": {
         "hardtemp": {
@@ -1146,12 +1152,19 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "ohm_${hardtemp}_celsius{instance=\"$instance\"}",
+          "expr": "avg_over_time(ohm_${hardtemp}_celsius{instance=\"$instance\"}[$__range])",
           "format": "time_series",
           "instant": false,
+          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{sensor}}",
+          "legendFormat": "AVG {{sensor}}",
           "refId": "A"
+        },
+        {
+          "expr": "ohm_${hardtemp}_celsius{instance=\"$instance\"}",
+          "interval": "",
+          "legendFormat": "RAW {{sensor}}",
+          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -1211,7 +1224,7 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 8,
         "x": 16,
         "y": 25
@@ -1243,7 +1256,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1610088368983,
+      "repeatIteration": 1610094924385,
       "repeatPanelId": 4,
       "scopedVars": {
         "hardtemp": {
@@ -1258,12 +1271,19 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "ohm_${hardtemp}_celsius{instance=\"$instance\"}",
+          "expr": "avg_over_time(ohm_${hardtemp}_celsius{instance=\"$instance\"}[$__range])",
           "format": "time_series",
           "instant": false,
+          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{sensor}}",
+          "legendFormat": "AVG {{sensor}}",
           "refId": "A"
+        },
+        {
+          "expr": "ohm_${hardtemp}_celsius{instance=\"$instance\"}",
+          "interval": "",
+          "legendFormat": "RAW {{sensor}}",
+          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -1323,10 +1343,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 8,
         "x": 0,
-        "y": 34
+        "y": 33
       },
       "hiddenSeries": false,
       "id": 106,
@@ -1355,7 +1375,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1610088368983,
+      "repeatIteration": 1610094924385,
       "repeatPanelId": 4,
       "scopedVars": {
         "hardtemp": {
@@ -1370,12 +1390,19 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "ohm_${hardtemp}_celsius{instance=\"$instance\"}",
+          "expr": "avg_over_time(ohm_${hardtemp}_celsius{instance=\"$instance\"}[$__range])",
           "format": "time_series",
           "instant": false,
+          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{sensor}}",
+          "legendFormat": "AVG {{sensor}}",
           "refId": "A"
+        },
+        {
+          "expr": "ohm_${hardtemp}_celsius{instance=\"$instance\"}",
+          "interval": "",
+          "legendFormat": "RAW {{sensor}}",
+          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -1426,7 +1453,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 43
+        "y": 41
       },
       "id": 31,
       "panels": [],
@@ -1452,7 +1479,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 44
+        "y": 42
       },
       "hiddenSeries": false,
       "id": 26,
@@ -1559,7 +1586,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 44
+        "y": 42
       },
       "hiddenSeries": false,
       "id": 107,
@@ -1586,7 +1613,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1610088368983,
+      "repeatIteration": 1610094924385,
       "repeatPanelId": 26,
       "scopedVars": {
         "volts": {
@@ -1656,7 +1683,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 52
+        "y": 50
       },
       "id": 12,
       "panels": [],
@@ -1682,7 +1709,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 53
+        "y": 51
       },
       "hiddenSeries": false,
       "id": 14,
@@ -1797,7 +1824,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 53
+        "y": 51
       },
       "hiddenSeries": false,
       "id": 108,
@@ -1825,7 +1852,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1610088368983,
+      "repeatIteration": 1610094924385,
       "repeatPanelId": 14,
       "scopedVars": {
         "network": {
@@ -1914,7 +1941,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 53
+        "y": 51
       },
       "hiddenSeries": false,
       "id": 109,
@@ -1942,7 +1969,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1610088368983,
+      "repeatIteration": 1610094924385,
       "repeatPanelId": 14,
       "scopedVars": {
         "network": {
@@ -2031,7 +2058,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 61
+        "y": 59
       },
       "hiddenSeries": false,
       "id": 110,
@@ -2059,124 +2086,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1610088368983,
-      "repeatPanelId": 14,
-      "scopedVars": {
-        "network": {
-          "selected": false,
-          "text": "LAN-Verbindung* 2",
-          "value": "LAN-Verbindung* 2"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "ohm_nic_bytes_per_second{instance=\"$instance\",hardware=~\"$network\",sensor=\"Download Speed\"}",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Download",
-          "refId": "A"
-        },
-        {
-          "expr": "ohm_nic_bytes_per_second{instance=\"$instance\",hardware=~\"$network\",sensor=\"Upload Speed\"}",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Upload",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$network Throughput",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "Bps",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 8,
-        "y": 61
-      },
-      "hiddenSeries": false,
-      "id": 111,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "hideZero": false,
-        "max": true,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "maxPerRow": 3,
-      "nullPointMode": "null",
-      "percentage": false,
-      "pluginVersion": "7.1.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeat": null,
-      "repeatDirection": "h",
-      "repeatIteration": 1610088368983,
+      "repeatIteration": 1610094924385,
       "repeatPanelId": 14,
       "scopedVars": {
         "network": {
@@ -2264,11 +2174,11 @@
       "gridPos": {
         "h": 8,
         "w": 8,
-        "x": 16,
-        "y": 61
+        "x": 8,
+        "y": 59
       },
       "hiddenSeries": false,
-      "id": 112,
+      "id": 111,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -2293,7 +2203,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1610088368983,
+      "repeatIteration": 1610094924385,
       "repeatPanelId": 14,
       "scopedVars": {
         "network": {
@@ -2370,7 +2280,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 69
+        "y": 67
       },
       "id": 52,
       "panels": [],
@@ -2396,7 +2306,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 70
+        "y": 68
       },
       "hiddenSeries": false,
       "id": 47,
@@ -2494,7 +2404,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 77
+        "y": 75
       },
       "id": 62,
       "panels": [],
@@ -2520,7 +2430,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 78
+        "y": 76
       },
       "hiddenSeries": false,
       "id": 56,
@@ -2630,10 +2540,10 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 78
+        "y": 76
       },
       "hiddenSeries": false,
-      "id": 113,
+      "id": 112,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -2659,7 +2569,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1610088368983,
+      "repeatIteration": 1610094924385,
       "repeatPanelId": 56,
       "scopedVars": {
         "control": {
@@ -2730,7 +2640,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 85
+        "y": 83
       },
       "id": 6,
       "panels": [],
@@ -2756,7 +2666,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 86
+        "y": 84
       },
       "hiddenSeries": false,
       "id": 2,
@@ -2858,7 +2768,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 86
+        "y": 84
       },
       "hiddenSeries": false,
       "id": 3,
@@ -3140,7 +3050,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {
@@ -3171,5 +3081,5 @@
   "timezone": "",
   "title": "OhmGraphite Prometheus",
   "uid": "ytSFUfvWz",
-  "version": 1
+  "version": 3
 }
